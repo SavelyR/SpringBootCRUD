@@ -1,0 +1,167 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-mychangelog.yaml
+  - changeSet:
+      id: 1
+      author: iam
+      changes:
+        - createTable:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: group_id
+                  type: BIGINT
+        - createTable:
+            tableName: groups
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: inst_id
+                  type: BIGINT
+        - createTable:
+            tableName: institutes
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+        - addForeignKeyConstraint:
+            baseColumnNames: group_id
+            baseTableName: students
+            constraintName: fk_group_id
+            referencedColumnNames: id
+            referencedTableName: groups
+        - addForeignKeyConstraint:
+            baseColumnNames: inst_id
+            baseTableName: groups
+            constraintName: fk_inst_id
+            referencedColumnNames: id
+            referencedTableName: institutes
+  - changeSet:
+      id: 2
+      author: iam
+      comment: "Filling the table"
+      changes:
+        - insert:
+            tableName: institutes
+            columns:
+              - column:
+                  name: name
+                  value: "IITUS"
+        - insert:
+            tableName: institutes
+            columns:
+              - column:
+                  name: name
+                  value: "ASI"
+        - insert:
+            tableName: groups
+            columns:
+              - column:
+                  name: name
+                  value: "AP"
+              - column:
+                  name: inst_id
+                  value: "1"
+        - insert:
+            tableName: groups
+            columns:
+              - column:
+                  name: name
+                  value: "IT"
+              - column:
+                  name: inst_id
+                  value: "1"
+        - insert:
+            tableName: groups
+            columns:
+              - column:
+                  name: name
+                  value: "AD"
+              - column:
+                  name: inst_id
+                  value: "2"
+        - insert:
+            tableName: groups
+            columns:
+              - column:
+                  name: name
+                  value: "PG"
+              - column:
+                  name: inst_id
+                  value: "2"
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: first_name
+                  value: "IVAN"
+              - column:
+                  name: last_name
+                  value: "IVANOV"
+              - column:
+                  name: group_id
+                  value: "1"
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: first_name
+                  value: "PETR"
+              - column:
+                  name: last_name
+                  value: "PETROV"
+              - column:
+                  name: group_id
+                  value: "2"
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: first_name
+                  value: "ALEX"
+              - column:
+                  name: last_name
+                  value: "ALEKSEEV"
+              - column:
+                  name: group_id
+                  value: "3"
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: first_name
+                  value: "SERJ"
+              - column:
+                  name: last_name
+                  value: "SERGEEV"
+              - column:
+                  name: group_id
+                  value: "4"
